@@ -1,4 +1,5 @@
-﻿//#define INHERITANCE_CHECK
+﻿//#define SAVE_TO_FILES
+//#define INHERITANCE_CHECK
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,15 +41,36 @@ namespace Academy
 				new Student("Pinkman", "Jessie", 22, "Chemistry", "WW_220", 95, 96),
 				new Graduate("Smith", "John", 24, "Chemistry", "WW_220", 90, 98, "NanoFiber", "Dr. Alan Turing"),
 			};
-			// Запись информации о каждом объекте в файл
-			using (StreamWriter sw = new StreamWriter("Group.txt"))
+#if SAVE_TO_FILES
+			//// Перезапись информации о каждом объекте в файл
+			//using (StreamWriter sw = new StreamWriter("Group.txt"))
+			//{
+			//	foreach (Human person in group)
+			//	{
+			//		sw.WriteLine(person.ToString());
+			//		sw.WriteLine();
+			//	}
+			//}
+
+			// Добавление информации о каждом объекте в файл
+			StreamWriter sw = File.AppendText("Group.txt");
+            foreach (Human person in group)
+            {
+                sw.WriteLine(person.ToString());
+                sw.WriteLine();
+            }
+            sw.Close();
+#endif
+
+			// Чтение данных из файла и вывод их в консоль
+			Console.WriteLine("Содержимое файла: ");
+			StreamReader sr = new StreamReader("Group.txt");
+			while (!sr.EndOfStream)
 			{
-				foreach (Human person in group)
-				{
-					sw.WriteLine(person.ToString());
-					sw.WriteLine();
-				}
+				string buffer = sr.ReadLine();
+				Console.WriteLine(buffer);
 			}
+			sr.Close();
 
 			// Открываем файл в блокноте для просмотра
 			Process.Start("notepad", "Group.txt");
