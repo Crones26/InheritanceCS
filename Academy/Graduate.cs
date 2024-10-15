@@ -42,7 +42,7 @@ namespace Academy
 
 		public override string ToFileString()
 		{
-			return base.ToFileString() + $", {ThesisTopic}, {Supervisor}";
+			return base.ToFileString() + $",{ThesisTopic},{Supervisor}";
 		}
 	}
 }

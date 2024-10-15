@@ -82,6 +82,5 @@ namespace Academy
 			Streamer.Save(group, "group.csv");
 
 		}
-
 	}
 }
