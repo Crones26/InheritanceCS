@@ -1,4 +1,5 @@
-﻿//#define SAVE_TO_FILES
+﻿//#define LOAD_TO_FILES
+//#define SAVE_TO_FILES
 //#define INHERITANCE_CHECK
 using System;
 using System.Collections.Generic;
@@ -36,10 +37,11 @@ namespace Academy
 
 			Human[] group = new Human[]
 			{
-				new Human("Montana", "Antonio", 25),
-				new Teacher("White", "Walter", 50, "Chemistry", 25),
 				new Student("Pinkman", "Jessie", 22, "Chemistry", "WW_220", 95, 96),
+				new Teacher("White", "Walter", 50, "Chemistry", 25),
+				new Student("Vercetty", "Tommy", 30, "Theft", "Vice", 97, 98),
 				new Graduate("Smith", "John", 24, "Chemistry", "WW_220", 90, 98, "NanoFiber", "Dr. Alan Turing"),
+				new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
 			};
 #if SAVE_TO_FILES
 			//// Перезапись информации о каждом объекте в файл
@@ -62,6 +64,7 @@ namespace Academy
             sw.Close();
 #endif
 
+#if LOAD_TO_FILES
 			// Чтение данных из файла и вывод их в консоль
 			Console.WriteLine("Содержимое файла: ");
 			StreamReader sr = new StreamReader("Group.txt");
@@ -71,9 +74,14 @@ namespace Academy
 				Console.WriteLine(buffer);
 			}
 			sr.Close();
-
 			// Открываем файл в блокноте для просмотра
-			Process.Start("notepad", "Group.txt");
+			Process.Start("notepad", "Group.txt"); 
+#endif
+
+			Streamer.Print(group);
+			Streamer.Save(group, "group.csv");
+
 		}
+
 	}
 }

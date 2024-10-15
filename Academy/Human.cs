@@ -8,6 +8,10 @@ namespace Academy
 {
 	internal class Human
 	{
+		static readonly int TYPE_WIDTH = 10;
+		static readonly int LAST_NAME_WIDTH = 12;
+		static readonly int FIRST_NAME_WIDTH = 12;
+		static readonly int AGE_WIDTH = 5;
 		public string LastName { get; set; }
 		public string FirstName { get; set; }
 		public int Age { get; set; }
@@ -24,14 +28,17 @@ namespace Academy
 		{
 			Console.WriteLine($"HDestructor:{GetHashCode()}");
 		}
-
 		public virtual void Print()
 		{
 			Console.WriteLine($"{LastName} {FirstName} {Age}");
 		}
 		public override string ToString()
 		{
-			return base.ToString() + $":   \t{LastName} {FirstName} {Age}";
+			return (base.ToString().Split('.').Last() + ":").PadRight(TYPE_WIDTH) + $"{LastName.PadRight(LAST_NAME_WIDTH)} {FirstName.PadRight(FIRST_NAME_WIDTH)} {Age.ToString().PadRight(AGE_WIDTH)}";
+		}
+		public virtual string ToFileString()
+		{
+			return GetType().ToString().Split('.').Last() + $", {LastName}, {FirstName}, {Age}";
 		}
 	}
 }
