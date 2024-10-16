@@ -44,5 +44,12 @@ namespace Academy
 		{
 			return base.ToFileString() + $",{ThesisTopic},{Supervisor}";
 		}
+		public override Human Init(string[] values)
+		{
+			base.Init(values);
+			ThesisTopic = values[8];
+			Supervisor = values[9];
+			return this;
+		}
 	}
 }

@@ -1,6 +1,8 @@
 ﻿//#define LOAD_TO_FILES
 //#define SAVE_TO_FILES
 //#define INHERITANCE_CHECK
+//#define SAVE_CHECK
+#define LOAD_CHECK
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,14 +37,6 @@ namespace Academy
             Console.WriteLine(graduate);
 #endif
 
-			Human[] group = new Human[]
-			{
-				new Student("Pinkman", "Jessie", 22, "Chemistry", "WW_220", 95, 96),
-				new Teacher("White", "Walter", 50, "Chemistry", 25),
-				new Student("Vercetty", "Tommy", 30, "Theft", "Vice", 97, 98),
-				new Graduate("Smith", "John", 24, "Chemistry", "WW_220", 90, 98, "NanoFiber", "Dr. Alan Turing"),
-				new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
-			};
 #if SAVE_TO_FILES
 			//// Перезапись информации о каждом объекте в файл
 			//using (StreamWriter sw = new StreamWriter("Group.txt"))
@@ -78,8 +72,24 @@ namespace Academy
 			Process.Start("notepad", "Group.txt"); 
 #endif
 
+#if SAVE_CHECK
+			Human[] group = new Human[]
+			{
+				new Student("Pinkman", "Jessie", 22, "Chemistry", "WW_220", 95, 96),
+				new Teacher("White", "Walter", 50, "Chemistry", 25),
+				new Student("Vercetty", "Tommy", 30, "Theft", "Vice", 97, 98),
+				new Graduate("Smith", "John", 24, "Chemistry", "WW_220", 90, 98, "NanoFiber", "Dr. Alan Turing"),
+				new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
+			};
+
 			Streamer.Print(group);
 			Streamer.Save(group, "group.csv");
+#endif
+
+#if LOAD_CHECK
+			Human[] group = Streamer.Load("group.csv");
+			Streamer.Print(group);
+#endif
 
 		}
 	}
